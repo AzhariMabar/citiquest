@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/icon.png" type="image/x-icon" />
+
+    <!--=============== REMIXICONS ===============-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.1.0/remixicon.min.css" />
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+
+    <title>Citiquest | ID</title>
+  </head>
+
+  <body>
+    <!--==================== HEADER ====================-->
+    <header class="header blur-header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav__logo">
+          <!-- <i class="ri-cactus-line"></i> CITIQUEST -->
+          <img src="assets/img/logo-text.png" style="height: 20px" alt="" />
+        </a>
+
+        <div class="nav__menu" id="nav-menu">
+          <ul class="nav__list">
+            <li class="nav__item">
+              <a href="#home" class="nav__link active-link">Home</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#new" class="nav__link">News</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#shop" class="nav__link">Comunity</a>
+            </li>
+
+            <li class="nav__item">
+              <a href="#care" class="nav__link">Service</a>
+            </li>
+          </ul>
+
+          <!-- Close button -->
+          <div class="nav__close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </div>
+
+        <div class="nav__actions">
+          <div class="auth_toggle" id="auth-menu">
+            <i class="ri-earth-line nav__link translate"></i>
+            <span class="auth_login" id="auth-login" onclick="toggleForm()"
+              >Log in</span
+            >
+            <button class="auth_register" id="auth-register">
+              Create Account
+            </button>
+          </div>
+
+          <!-- Toggle button -->
+          <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+          </div>
+
+          <div class="nav__toggle" id="auth-toggle">
+            <i class="ri-user-line"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="main news-section">
+      <div class="news-background" id="news">
+        <div class="news-top">
+          <div class="news-column"><a href="">News</a></div>
+          <div class="news-column"><a href="">Dev Post</a></div>
+          <div class="news-column"><a href="">Info</a></div>
+          <div class="news-column"><a href="">Event</a></div>
+        </div>
+
+        <div class="news-container">
+          <div class="news-row">
+            <div class="news-thumbnail">
+              <img src="assets/img/news-bg.jpeg" alt="Thumbnail 1" />
+            </div>
+            <div class="news-details">
+              <div class="news-category">News</div>
+              <div class="news-title">
+                Lorem Ipsum cit dolor amet (ini title artikel)
+              </div>
+              <div class="news-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. (ini body text)
+              </div>
+              <div class="news-date">May 8, 2024</div>
+            </div>
+          </div>
+
+          <div class="news-row">
+            <div class="news-thumbnail">
+              <img src="assets/img/news-bg.jpeg" alt="Thumbnail 2" />
+            </div>
+            <div class="news-details">
+              <div class="news-category">News</div>
+              <div class="news-title">
+                Lorem Ipsum cit dolor amet (ini title artikel)
+              </div>
+              <div class="news-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. (ini body text)
+              </div>
+              <div class="news-date">May 8, 2024</div>
+            </div>
+          </div>
+
+          <div class="news-row">
+            <div class="news-thumbnail">
+              <img src="assets/img/news-bg.jpeg" alt="Thumbnail 3" />
+            </div>
+            <div class="news-details">
+              <div class="news-category">News</div>
+              <div class="news-title">
+                Lorem Ipsum cit dolor amet (ini title artikel)
+              </div>
+              <div class="news-description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. (ini body text)
+              </div>
+              <div class="news-date">May 8, 2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--==================== FORM AUTH LOG-IN ====================-->
+    <div class="form-auth">
+      <div class="form-container">
+        <form class="trapezoid-form">
+          <div class="form-header">
+            <i class="header-close ri-close-line" onclick="closeForm()"></i>
+          </div>
+          <h1>Log in</h1>
+          <p>Please enter your email and password.</p>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-email"
+              placeholder="Email"
+              required />
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-password"
+                placeholder="Password"
+                required />
+              <i
+                class="ri-eye-line toggle-password"
+                onclick="togglePassword()"></i>
+            </div>
+          </div>
+          <div
+            class="form-group"
+            style="text-align: right; margin-bottom: 10px">
+            <a style="color: #007bff" onclick="openForgotPassword()"
+              >Forgot Password?</a
+            >
+          </div>
+          <button type="submit" class="form-submit">Register / Log in</button>
+          <div>
+            <p>
+              Don't have an account? <a onclick="openRegister()">Register</a>
+            </p>
+          </div>
+          <div class="small-trapezium"></div>
+          <div class="small-trapezium-2"></div>
+        </form>
+      </div>
+    </div>
+
+    <!--==================== FORM AUTH REGISTER ====================-->
+    <div class="form-auth-register">
+      <div class="form-container-register">
+        <form class="trapezoid-form-register">
+          <div class="form-header-register">
+            <i
+              class="header-close ri-close-line"
+              onclick="closeFormRegister()"></i>
+          </div>
+          <h1>Register</h1>
+          <p>Please enter your email and OTP code.</p>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-email-register"
+              placeholder="Email"
+              required />
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input
+                type="OTP"
+                id="OTP"
+                name="OTP"
+                class="form-password-register"
+                placeholder="OTP Code"
+                required />
+            </div>
+          </div>
+          <button type="submit" class="form-submit-register">Get Code</button>
+          <button type="submit" class="form-submit-register">Register</button>
+          <div>
+            <p>
+              Already have an account?
+              <a href="#" onclick="closeForm()">Log in</a>
+            </p>
+          </div>
+          <div class="small-trapezium"></div>
+          <div class="small-trapezium-2"></div>
+        </form>
+      </div>
+    </div>
+
+    <!--==================== FORM AUTH FORGOT PASSWORD ====================-->
+    <div class="form-auth-forgot-password">
+      <div class="form-container-forgot-password">
+        <form class="trapezoid-form-forgot-password">
+          <div class="form-header-forgot-password">
+            <i
+              class="header-close ri-close-line"
+              onclick="closeForgotPassword()"></i>
+          </div>
+          <h1>Forgot Password</h1>
+          <p>Please enter your email, OTP code and new password..</p>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-email-forgot-password"
+              placeholder="Email"
+              required />
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input
+                type="OTP"
+                id="OTP"
+                name="OTP"
+                class="form-password-forgot-password"
+                placeholder="OTP Code"
+                required />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-password-forgot-password"
+                placeholder="New password"
+                required />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="password-input">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-password-forgot-password"
+                placeholder="Confirm new password"
+                required />
+            </div>
+          </div>
+          <button type="submit" class="form-submit-forgot-password">
+            Get Code
+          </button>
+          <button type="submit" class="form-submit-forgot-password">
+            Continue
+          </button>
+          <div class="small-trapezium"></div>
+          <div class="small-trapezium-2"></div>
+        </form>
+      </div>
+    </div>
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer">
+      <div class="footer__container container grid">
+        <div>
+          <a href="#" class="footer__logo">
+            <img src="assets/img/logo-text.png" alt="" />
+          </a>
+
+          <p class="footer__description">
+            Choose the best <br />
+            plants for your home.
+          </p>
+        </div>
+
+        <div class="footer__content grid">
+          <div>
+            <h3 class="footer__title">COMPANY</h3>
+
+            <ul class="footer__links">
+              <li>
+                <a href="#" class="footer__link">About Us</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer__link">Products</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer__link">Features</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer__title">INFORMATION</h3>
+
+            <ul class="footer__links">
+              <li>
+                <a href="#" class="footer__link">Blogs & News</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer__link">Contacts Us</a>
+              </li>
+
+              <li>
+                <a href="#" class="footer__link">FAQs</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="footer__title">SOCIAL MEDIA</h3>
+
+            <div class="footer__social">
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                class="footer__social-link">
+                <i class="ri-facebook-circle-fill"></i>
+              </a>
+
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                class="footer__social-link">
+                <i class="ri-instagram-fill"></i>
+              </a>
+
+              <a
+                href="https://twitter.com/"
+                target="_blank"
+                class="footer__social-link">
+                <i class="ri-twitter-x-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span class="footer__copy"> &#169; All Rights Reserved By mabar </span>
+    </footer>
+
+    <!--========== SCROLL UP ==========-->
+    <a href="#" class="scrollup" id="scroll-up">
+      <i class="ri-arrow-up-line"></i>
+    </a>
+
+    <!--=============== SCROLLREVEAL ===============-->
+    <script src="assets/js/scrollreveal.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

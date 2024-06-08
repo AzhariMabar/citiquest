@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tracking App</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map { height: 100vh; }
+        #startStopButton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000; /* Ensure button is above the map */
+        }
+        #distance {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 16px;
+            z-index: 1000; /* Ensure distance is above the map */
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="distance">Distance: 0 km</div>
+    <button id="startStopButton">Start</button>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map');
+        const route = [];
+        let tracking = false;
+        let watchID = null;
+        let totalDistance = 0;
+        let lastPosition = null;
+
+        const button = document.getElementById('startStopButton');
+        const distanceDiv = document.getElementById('distance');
+
+        const userIcon = L.icon({
+            iconUrl: 'https://cdn-icons-png.freepik.com/512/1451/1451202.png', // Ganti URL ini dengan URL gambar motor Anda
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        function showPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            map.setView([lat, lon], 18);  // Zoom level set to 16
+            L.marker([lat, lon], { icon: userIcon }).addTo(map)
+                .bindPopup('Start position')
+                .openPopup();
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            function toRad(x) {
+                return x * Math.PI / 180;
+            }
+
+            const R = 6371; // Radius of the Earth in km
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function trackPosition(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            route.push([lat, lon]);
+
+            if (route.length > 1) {
+                L.polyline(route, { color: 'blue' }).addTo(map);
+
+                if (lastPosition) {
+                    const distance = calculateDistance(lastPosition[0], lastPosition[1], lat, lon);
+                    totalDistance += distance;
+                    distanceDiv.innerHTML = `Distance: ${totalDistance.toFixed(2)} km`;
+                }
+
+                lastPosition = [lat, lon];
+            }
+
+            map.setView([lat, lon]);
+        }
+
+        function startTracking() {
+            if (navigator.geolocation) {
+                watchID = navigator.geolocation.watchPosition(trackPosition, showError, {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 5000
+                });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function stopTracking() {
+            if (navigator.geolocation && watchID !== null) {
+                navigator.geolocation.clearWatch(watchID);
+                watchID = null;
+            }
+        }
+
+        button.addEventListener('click', () => {
+            tracking = !tracking;
+            if (tracking) {
+                button.textContent = 'Stop';
+                button.style.backgroundColor = 'green';
+                route.length = 0; // Reset route
+                totalDistance = 0;
+                lastPosition = null;
+                distanceDiv.innerHTML = `Distance: 0 km`;
+                startTracking();
+            } else {
+                button.textContent = 'Start';
+                button.style.backgroundColor = 'red';
+                stopTracking();
+            }
+        });
+
+        // Initial position check and map setup
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                showPosition(position);
+                // Initialize the map tile layer
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+            }, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    </script>
+</body>
+</html>
