@@ -92,3 +92,34 @@ function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
+
+var jumlahSubscribers = 0;
+document.getElementById("jumlahSubscribers").innerText = "Subscribers: 0";
+
+db.collection("subscribers").get().then((querySnapshot) => {
+  // Hitung jumlah dokumen (pengguna yang berlangganan)
+  jumlahSubscribers = querySnapshot.size;
+  console.log(jumlahSubscribers);
+
+  // Memulai animasi counting setelah mendapatkan data
+  startCountAnimation();
+});
+
+var currentCount = 0;
+function updateCount() {
+  currentCount++;
+  document.getElementById("jumlahSubscribers").innerText = "Subscribers: " + currentCount;
+
+  // Hentikan animasi ketika mencapai nilai tertentu (misalnya, jumlahSubscribers)
+  if (currentCount === jumlahSubscribers) {
+    clearInterval(countingInterval);
+  }
+}
+
+function startCountAnimation() {
+  countingInterval = setInterval(updateCount, 100);
+}
+    
+
+
+

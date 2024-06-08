@@ -453,6 +453,18 @@ input.input100 {
   max-width: 100%;
 }
 
+.wrap-pic2{
+  width: 10%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.wrap-pic2 img {
+  width: 50%;
+  align-self: center;
+}
+
 
 
 
